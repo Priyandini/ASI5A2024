@@ -11,7 +11,7 @@ char c;
 cout << "Ketikkan pesan: ";
 cin.ignore();
 getline(cin, plainteks);
-cout << "Masukkan jumlah pergeseran (0-3): ";
+cout << "Masukkan jumlah pergeseran (0-25): ";
 cin >> k;
 
 for(i = 0; i < plainteks.length(); i++){
@@ -28,28 +28,23 @@ cout << "Cipherteks: " << cipherteks << endl;
 }
 
 void dekripsi(){
-	string plainteks, cipherteks;
+string plainteks, cipherteks;
 int i, k;
 char c;
 
 cout << "Ketikkan cipherteks: ";
 cin.ignore();
 getline(cin, cipherteks);
-cout << "Masukkan jumlah pergeseran (0-3): ";
+cout << "Masukkan jumlah pergeseran (0-25): ";
 cin >> k;
 
 for(i = 0; i < cipherteks.length(); i++){
     c = cipherteks[i];
     if(isalpha(c)){
-    	c = toupper(c);
         c = c - 65;
-        if (c - k < 0) {
-        	c = 26 + (c+k);
-		} else {
-			c = (c - k) % 26;
-			c = c + 65;
-			c = tolower(c);
-		}
+        c = (c - k + 26) % 26;
+        c = c + 65;
+        c = tolower(c);
     }
     plainteks = plainteks + c;
 }
@@ -65,12 +60,11 @@ while(!stop){
     cout << "1. enkripsi " << endl;
     cout << "2. dekripsi " << endl;
     cout << "3. exit " << endl;
-    
     cout << "pilih menu "; cin >> pil;
     switch(pil){
         case 1: enkripsi(); break;
         case 2: dekripsi(); break;
         case 3: stop = true; break;
-    }
+}
 }
 }
